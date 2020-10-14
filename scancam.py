@@ -5,14 +5,17 @@ class scancamera(object):
     This class handle the picamera
     """
     camera = PiCamera()
+    #print("creating object")
 
     def set_scan_pic(self):
         self.camera.vflip=True
-        #self.camera.resolution = (640,480)
+        self.camera.resolution = (640,480)
+        self.camera.resolution = (160,160)
         #self.camera.resolution = (2592,1944)
-        self.camera.resolution = (3280,2464  )
-    def open():
-        camera.start_preview()
+        #self.camera.resolution = (3280,2464  )
+    
+    #def open():
+    #    camera.start_preview()
 
     def hflip(self):
         self.camera.hflip=True
@@ -20,12 +23,11 @@ class scancamera(object):
     def vflip(self, val=True):
         self.camera.vflip=val
 
-
-    def take_stream(self, stream, type='png'):
-        self.camera.capture(stream, type)
+    def take_stream(self, stream, type='jpeg'):
+        self.camera.capture(stream, format=type, use_video_port=True)
 
     def take_file(self, file):
-        self.camera.capture(file, bayer=True)
+        self.camera.capture(file, use_video_port=True)
 
     def close(self):
         self.camera.close()
@@ -57,10 +59,3 @@ class scancamera(object):
         print("Sensor Mode: ", self.camera.sensor_mode)
         print("Sharpness: ", self.camera.sharpness)
         print("Zoom: ", self.camera.zoom)
-
-
-
-
-
-
-

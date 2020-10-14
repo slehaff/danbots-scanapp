@@ -18,13 +18,20 @@ class Scanner:
     f2 = BytesIO()
     f3 = BytesIO()
     cam = scancam.scancamera()
+    cam.set_scan_pic()
 
     def Pic1Setup():
         pass
 
     def ScanSet(self):
+        self.f1.seek(0)
         self.cam.take_stream(self.f1)
+        self.f2.seek(0)
+        self.cam.take_stream(self.f2)
+        self.f3.seek(0)
+        self.cam.take_stream(self.f3)
 
-my = Scanner()
-my.ScanSet()
-print("F1:", my.f1)
+##my = Scanner()
+#y.ScanSet()
+#print("F1:", my.f1)
+

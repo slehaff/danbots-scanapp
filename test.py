@@ -3,39 +3,30 @@ import time
 import scancam
 from io import BytesIO
 
-antal_billeder = 10
-start = datetime.datetime.now()
-print ("Starting", start)
 
 
 mycam = scancam.scancamera()
-print("default settings")
-mycam.settings()
+#print("default settings")
+#mycam.settings()
 mycam.set_scan_pic()
 mycam.settings()
-#mycam.start_preview()
+mycam.start_preview()
 time.sleep(5)
 
 
 
 #mycam.stop_preview()
 
+antal_billeder = 10
+start = datetime.datetime.now()
 i = 0
 while i<antal_billeder:
-    #time.sleep(5)    
-    my_stream = BytesIO()
+    #my_stream = BytesIO()
     #mycam.take_stream(my_stream)
-
-    #print("take picture", datetime.datetime.now())
- 
-    mycam.take_stream(my_stream)
-    #mycam.take_file('test.png')
-    #print("taken", datetime.datetime.now())
-    #mycam.settings()
-    #print("done - exposure", mycam.info())
+    mycam.take_file('test.png')
     i += 1
-
 slut = datetime.datetime.now()
+print ("Starting", start)
 print ("slutter", slut)
 mycam.settings()
 
@@ -45,3 +36,4 @@ print (dif)
 seconds = dif.total_seconds()
 
 print ("Billeder pr sek", antal_billeder/seconds)
+#print (my_stream.getbuffer().nbytes)
