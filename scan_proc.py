@@ -13,7 +13,7 @@ scanner.ScanSet()
 print ("F1:", scanner.f1.getbuffer().nbytes )
 
 start=datetime.now()
-antal=10
+antal=100
 i=0
 while i<antal: 
     scanner.ScanSet() 
