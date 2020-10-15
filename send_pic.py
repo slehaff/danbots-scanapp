@@ -3,7 +3,7 @@ import requests
 HOST_URL = 'http://live.danbots.com/api/test'
 URL = 'http://samir-Nitro-AN515-53.local:8000/scan/upload'
 URL = 'http://live.danbots.com/api/sendpic'
-URL = 'http://192.168.0.100:8000/api/sendpic'
+#URL = 'http://192.168.0.100:8000/api/sendpic'
 
 
 

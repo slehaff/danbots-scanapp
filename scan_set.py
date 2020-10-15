@@ -24,8 +24,10 @@ class Scanner:
         pass
 
     def ScanSet(self):
+        self.cam.color_effects(None)
         self.f1.seek(0)
         self.cam.take_stream(self.f1)
+        self.cam.color_effects((127,127))
         self.f2.seek(0)
         self.cam.take_stream(self.f2)
         self.f3.seek(0)

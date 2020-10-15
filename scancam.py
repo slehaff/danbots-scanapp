@@ -38,6 +38,9 @@ class scancamera(object):
     def stop_preview(self):
         self.camera.stop_preview()
 
+    def color_effects(self, tuple):
+        self.camera.color_effects = tuple
+
     def info(self):
         print(" -- exposure --")
         print("Gain (Analog,Digital): ", self.camera.analog_gain, self.camera.digital_gain, end=" ")
