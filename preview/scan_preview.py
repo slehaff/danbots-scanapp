@@ -1,6 +1,6 @@
-import datetime
-import time
-import scancam
+#import datetime
+#import time
+import .scancam
 from io import BytesIO
 
 ################
