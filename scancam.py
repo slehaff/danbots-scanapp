@@ -23,10 +23,10 @@ class scancamera(object):
     def vflip(self, val=True):
         self.camera.vflip=val
 
-    def take_stream(self, stream, type='jpeg'):
+    def capture_stream(self, stream, type='jpeg'):
         self.camera.capture(stream, format=type, use_video_port=True)
 
-    def take_file(self, file):
+    def capture_file(self, file):
         self.camera.capture(file, use_video_port=True)
 
     def close(self):
@@ -40,6 +40,9 @@ class scancamera(object):
 
     def color_effects(self, tuple):
         self.camera.color_effects = tuple
+
+    def resolution(self, tuple):
+        self.camera.resolution = tuple
 
     def info(self):
         print(" -- exposure --")
