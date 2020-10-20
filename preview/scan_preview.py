@@ -1,6 +1,6 @@
 #import datetime
 #import time
-import .scancam
+from scancam import scancamera
 from io import BytesIO
 
 ################
@@ -9,7 +9,7 @@ from io import BytesIO
 
 class Preview:
     f1 = BytesIO()
-    cam = scancam.scancamera()
+    cam = scancamera()
     #cam.set_scan_pic()
 
     def Pic1Setup():
@@ -17,4 +17,5 @@ class Preview:
 
     def Scan(self):
         self.f1.seek(0)
+        self.f1.truncate()
         self.cam.capture_stream(self.f1)
