@@ -5,11 +5,12 @@ class scancamera(object):
     This class handle the picamera
     """
     camera = PiCamera()
+    camera.resolution = (160,160)
     #print("creating object")
 
     def set_scan_pic(self):
         self.camera.vflip=True
-        self.camera.resolution = (640,480)
+        #self.camera.resolution = (640,480)
         self.camera.resolution = (160,160)
         #self.camera.resolution = (2592,1944)
         #self.camera.resolution = (3280,2464  )

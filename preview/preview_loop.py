@@ -13,10 +13,11 @@ def save_stream (f1, filename):
     f2.write(f1.read(-1))
     f2.close()
 
-sleeptime = 0.25    # 4 pic pr seconds
+sleeptime = 0.05    # 4 pic pr seconds
 runtime = 5 * 60.0  / sleeptime    # minutes
 
 prev = Preview()
+prev.cam.resolution=(160,160)
 #adjust camera
 time.sleep(2)
 i=1

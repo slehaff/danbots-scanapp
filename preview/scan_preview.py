@@ -10,6 +10,8 @@ from io import BytesIO
 class Preview:
     f1 = BytesIO()
     cam = scancamera()
+    cam.resolution=((160,160))
+    cam.settings()
     #cam.set_scan_pic()
 
     def Pic1Setup():
