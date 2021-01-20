@@ -9,7 +9,7 @@ class scancamera(object):
 
     def set_scan_pic(self):
         self.camera.vflip=True
-        self.camera.resolution = (640,480)
+        #self.camera.resolution = (640,480)
         self.camera.resolution = (160,160)
         #self.camera.resolution = (2592,1944)
         #self.camera.resolution = (3280,2464  )
@@ -27,7 +27,11 @@ class scancamera(object):
         self.camera.capture(stream, format=type, use_video_port=True)
 
     def capture_file(self, file):
-        self.camera.capture(file, use_video_port=True)
+        #self.camera.capture(file, use_video_port=True)
+        self.camera.capture(file)
+
+    def exposure_mode(self, val):
+        self.camera.exposure_mode = 'off'
 
     def close(self):
         self.camera.close()
