@@ -12,13 +12,14 @@
 
 #import config
 from config import DEBUG, WINDOWS, config
-import send_pic
+from send_info import SendFiles
 from scan_set import ScanFileSet
 #from io import BytesIO
 
 SCAN_PICTURE='scan_picture'
 NUMBER_PIC='number_pic'
 NO_PICTURE = 3
+DEBUG=True
 
 # if os.name=='nt':
 # 	CONFIGFILE="../danwand.conf"	
@@ -26,10 +27,10 @@ NO_PICTURE = 3
 # else:
 # 	from picamera import PiCamera
 	
-print ("Starting Scan_PIC")
+if DEBUG: print ("Starting Scan_PIC")
 
 scanpicture = config[SCAN_PICTURE]
-no_picture = scanpicture.get(NUMBER_PIC, NO_PICTURE)
+no_picture = scanpicture.getint(NUMBER_PIC, NO_PICTURE)
 
 # init camera
 
@@ -47,11 +48,11 @@ no_picture = scanpicture.get(NUMBER_PIC, NO_PICTURE)
 # filearr.append('file2.jpg')
 #print ("arr",filearr)
 
-files = ScanFileSet(10)
+files = ScanFileSet(no_picture)
 print ("Files:", files)
 data={'scannerid':'654321'}
-info={'billedinfo': "2 filer"}
-result =send_pic.SendFiles(files, params=data, info=None)
+info={'billedinfo': str(no_picture) + " filer"}
+result =SendFiles(files, params=data, info=None)
 #result =send_pic.SendFiles('file1.jpg', params=data, info=info)
 #send_pic.SendFiles(filearr, params=data, info=info)
 print('Result:', result)

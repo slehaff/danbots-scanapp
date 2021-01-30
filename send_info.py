@@ -8,7 +8,16 @@ from config import DEBUG, APISERVER
 APIURL = APISERVER + "sendpic"
 HTTP_TIMEOUT=10
 
-def SendFiles (files, info=None, params=None):
+def SendFiles (files: str or [str], info=None, params=None):
+    """ Send a bunch of file to the server 
+
+    :param files: filesname(s) as a sting or a list of strings
+    :param info: dict send as POST content
+    :param param: dict sends as http request Get parameters
+    :return: Result of operations
+    :rtype: Boolean
+    """
+
     if DEBUG: print("SendFiles:", files, info, params)
     files_spec=None
     data_spec={}
