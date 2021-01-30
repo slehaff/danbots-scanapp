@@ -1,4 +1,4 @@
-import datetime
+#import datetime
 import time
 #import scancam
 from io import BytesIO
@@ -13,12 +13,10 @@ from config import DEBUG, WINDOWS
 # f3 solarized
 #
 
-camera = None 
-def initcam():
-    if not WINDOWS:
-        from picamera import PiCamera
-        camera = picamera()
-    return
+
+if not WINDOWS:
+    from picamera import PiCamera
+    camera = PiCamera()
 
 def take_pic(filename):
     if not WINDOWS:
@@ -27,9 +25,17 @@ def take_pic(filename):
 
 
 def ScanFileSet(antal=2):
-    take_pic('file1.jpg')
-    take_pic('file2.jpg')
-    return ['file1.jpg','file2.jpg']
+    time.sleep(2)
+    i = 1
+    filelist =[]
+    while i<=antal:
+        filename ="file" + str(i) + ".jpg"
+        print("Take one", filename)
+        take_pic(filename)
+        filelist.append(filename)
+        time.sleep(2)
+        i += 1
+    return filelist
 
 # class Scanner:
 #     f1 = BytesIO()

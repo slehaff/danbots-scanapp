@@ -42,16 +42,16 @@ no_picture = scanpicture.get(NUMBER_PIC, NO_PICTURE)
 # 	camera.capture(f1,format='jpeg')
 # 	camera.capture('test.jpg')
 
-filearr=[]
-filearr.append('file1.jpg')
-filearr.append('file2.jpg')
+# filearr=[]
+# filearr.append('file1.jpg')
+# filearr.append('file2.jpg')
 #print ("arr",filearr)
 
-files = ScanFileSet(2)
+files = ScanFileSet(10)
 print ("Files:", files)
 data={'scannerid':'654321'}
 info={'billedinfo': "2 filer"}
-result =send_pic.SendFiles(files, params=data, info=info)
+result =send_pic.SendFiles(files, params=data, info=None)
 #result =send_pic.SendFiles('file1.jpg', params=data, info=info)
 #send_pic.SendFiles(filearr, params=data, info=info)
 print('Result:', result)

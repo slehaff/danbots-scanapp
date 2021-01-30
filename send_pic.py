@@ -3,7 +3,6 @@
 #
 	
 import requests
-
 from config import DEBUG, APISERVER
 
 APIURL = APISERVER + "sendpic"
@@ -25,7 +24,7 @@ def SendFiles (files, info=None, params=None):
         data_spec = params
     
     if info is not None:
-        data_spec = {**data_spec, "info": info}
+        data_spec = { **data_spec, "info": info}
     if DEBUG:
         print('Data', data_spec)
         print ("filespec", files_spec)
