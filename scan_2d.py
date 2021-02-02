@@ -5,7 +5,7 @@
 
 #import os
 #import time
-#import datetime
+from datetime import datetime
 #import configparser	
 #import requests
 #import signal
@@ -20,14 +20,8 @@ SCAN_PICTURE='scan_picture'
 NUMBER_PIC='number_pic'
 NO_PICTURE = 3
 DEBUG=True
-
-# if os.name=='nt':
-# 	CONFIGFILE="../danwand.conf"	
-# 	WINDOWS=True
-# else:
-# 	from picamera import PiCamera
 	
-if DEBUG: print ("Starting Scan_PIC")
+if DEBUG: print ("Starting 2D Scan", datetime.now().time())
 
 scanpicture = config[SCAN_PICTURE]
 no_picture = scanpicture.getint(NUMBER_PIC, NO_PICTURE)
@@ -53,9 +47,9 @@ print ("Files:", files)
 data={'scannerid':'654321'}
 info={'billedinfo': str(no_picture) + " filer"}
 result =SendFiles(files, params=data, info=None)
-#result =send_pic.SendFiles('file1.jpg', params=data, info=info)
-#send_pic.SendFiles(filearr, params=data, info=info)
 print('Result:', result)
+if DEBUG: print ("Ending 2D Scan", datetime.now().time())
+
 #lib.send_pic.SendFiles(filearr)
 
 
