@@ -8,6 +8,8 @@ from config import DEBUG, APISERVER
 APIURL = APISERVER + "sendpic"
 HTTP_TIMEOUT=10
 
+#print (APIURL)
+
 def SendFiles (files: str or [str], info=None, params=None):
     """ Send a bunch of file to the server 
 

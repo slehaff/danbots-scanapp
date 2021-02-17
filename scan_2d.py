@@ -1,4 +1,4 @@
-#! dd/bin/python3 
+#!/usr/bin/python3 
 #
 # scan a picture serie for stitching
 #
@@ -44,7 +44,7 @@ no_picture = scanpicture.getint(NUMBER_PIC, NO_PICTURE)
 
 files = ScanFileSet(no_picture)
 print ("Files:", files)
-data={'scannerid':'654321'}
+data={'scannerid':'654321',"cmd":"stitch"}
 info={'billedinfo': str(no_picture) + " filer"}
 result =SendFiles(files, params=data, info=None)
 print('Result:', result)
