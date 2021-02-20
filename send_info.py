@@ -19,7 +19,7 @@ def SendFiles (files: str or [str], info=None, params=None):
     :return: Result of operations
     :rtype: Boolean
     """
-
+    DEBUG=False
     if DEBUG: print("SendFiles:", files, info, params)
     files_spec=None
     data_spec={}
@@ -54,26 +54,58 @@ def SendFiles (files: str or [str], info=None, params=None):
         print('Noget gik galt: ', r.status_code)
         print(r.text)
     return False
-    
-# def SendFiles2(f1,f2,f3):
-#     #print ("sending files")
-#     #print (f1, f2, f3)  
-#     f1.seek(0)
-#     f2.seek(0)
-#     f3.seek(0)
 
-#     #with open(f1, 'rb') as f1, open(f2, 'rb') as f2, open(f3, 'rb') as f3:
-#     try:
-#         r = requests.post(URL, timeout=1, files={'Pic1': ('pic1.jpg', f1), 'Pic2': ('pic2.jpg',f2), 'Pic3': ('pic3.jpg', f3) }, data={'scannerid':'654321', 'cmd':'tekst'})
-#     except requests.exceptions.RequestException as e:
-#         print(e)
-#         return False
+def SendMemFiles (files, file_name="file", file_type="jpg", info=None, params=None):
+    """ Send a bunch of memmory file to the server 
+
+    :param files: fd(s)  or a list of fd(s)
+    :param filename: str
+    :param file_type: type of file
+    :param info: dict send as POST content
+    :param param: dict sends as http request Get parameters
+    :return: Result of operations
+    :rtype: Boolean
+    """
+    DEBUG=False
+    if DEBUG: print("SendFiles:", files, info, params)
+    files_spec=None
+    data_spec={}
+    info_spec=None
+
+    if type(files) is list:
+        files_spec=[]
+        i = 1
+        for f in files:
+            f.seek(0)
+            filename = file_name + str(i) + '.' + file_type
+            print(filename)
+            files_spec.append(('Picture', (filename, f)))
+            i = i+1
+    else:
+        filename = file_name + "." + file_type
+        files.seek(0)
+        files_spec={'Picture': (filename, files)}
+    
+    if params is not None:
+        data_spec = params
+    
+    if info is not None:
+        data_spec = { **data_spec, "info": info}
+    if DEBUG:
+        print('Data', data_spec)
+        print ("filespec", files_spec)
+    try:
+        r = requests.post(APIURL, timeout=HTTP_TIMEOUT, files=files_spec, data=data_spec)
+    except requests.exceptions.RequestException as e:
+        print(e)
+        return False
             
-#     if r.status_code == requests.codes.ok:
-#         #print('det gik godt')
-#         #print(r.text)
-#         pass
-#     else:
-#         print('Noget gik galt: ', r.status_code)
-#         print(r.text)
-#     return
+    if r.status_code == requests.codes.ok:
+        if DEBUG:
+            print('det gik godt')
+            print(r.text)
+        return True
+    else:
+        print('Noget gik galt: ', r.status_code)
+        print(r.text)
+    return False

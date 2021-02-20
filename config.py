@@ -30,7 +30,7 @@ DEBUG=config.getboolean('debug','debug',fallback=False)
 #     DEBUG=config['debug'].get('debug', DEBUG) 
 #print ('Sections: ', config.sections())
 APISERVER=config['server']['apiserver']
-print(APISERVER)
+#print(APISERVER)
 # scanpicture = config[SCAN_PICTURE]
 # no_picture = scanpicture.get(NUMBER_PIC, NO_PICTURE)
 #print("ApiServer", APISERVER)

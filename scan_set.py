@@ -22,7 +22,7 @@ FILENAME = "file"
 FILETYPE = ".jpg"
 
 if not WINDOWS:
-    from picamera import PiCamera
+    from picamera import PiCamera  # pylint: disable=unresolved-import
     camera = PiCamera()
 else:
     FOLDER = 'data/'
@@ -32,17 +32,33 @@ def take_pic(filename):
         camera.capture(filename)
     return True
 
+def take_fd():
+    if not WINDOWS:
+        fd = BytesIO()
+        camera.capture(fd, format='jpeg')
+    return fd
+
 def ScanFileSet(antal=2):
     time.sleep(camera_init_time)
     i = 1
     filelist =[]
-    #print (datetime.datetime.now().time())
     while i<=antal:
-        #print (datetime.datetime.now().time())
         filename =FOLDER + FILENAME + str(i) + FILETYPE
-        #print("Take one", filename)
         if not WINDOWS: take_pic(filename)
         filelist.append(filename)
+        time.sleep(picture_interval_time)
+        i += 1
+    return filelist
+
+def ScanMemSet(antal=1):
+    time.sleep(camera_init_time)
+    i = 1
+    filelist =[]
+    while i<=antal:
+        #print (datetime.datetime.now().time())
+        if not WINDOWS: 
+            fd = take_fd()
+        filelist.append(fd)
         time.sleep(picture_interval_time)
         i += 1
     #print (datetime.datetime.now().time())
