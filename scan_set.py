@@ -1,7 +1,8 @@
 import datetime
 import time
 #import scancam
-from io import BytesIO
+from io import BytesIO, open
+from shutil import copyfileobj, copyfile
 from config import DEBUG, WINDOWS, config
 
 ################
@@ -38,6 +39,12 @@ def take_fd():
         camera.capture(fd, format='jpeg')
     return fd
 
+def speed_fd():
+    if not WINDOWS:
+        fd = BytesIO()
+        camera.capture(fd, format='jpeg', use_video_port=True)
+    return fd
+
 def ScanFileSet(antal=2):
     time.sleep(camera_init_time)
     i = 1
@@ -57,12 +64,39 @@ def ScanMemSet(antal=1):
     while i<=antal:
         #print (datetime.datetime.now().time())
         if not WINDOWS: 
-            fd = take_fd()
+            #fd = take_fd()
+            fd = speed_fd()
         filelist.append(fd)
         time.sleep(picture_interval_time)
         i += 1
     #print (datetime.datetime.now().time())
     return filelist
+
+def ScanContMemSet(antal=10):
+    time.sleep(camera_init_time)
+    j = 0
+    filelist = []
+    stream = BytesIO()
+    for i in enumerate(camera.capture_continuous(stream, format='jpeg', use_video_port=True)):
+        stream.truncate()
+        stream.seek(0)
+        fd = BytesIO()
+        # with open("test"+str(j)+".jpg","wb") as outfile:
+        #     outfile.write(stream.getbuffer())
+        # stream.seek(0)
+        copyfileobj(stream, fd)
+        filelist.append(fd)
+        stream.seek(0)
+        stream.truncate(0)
+
+       
+
+        j = j+1
+        if j>=antal:
+            break;
+
+    return filelist
+
 
 # class Scanner:
 #     f1 = BytesIO()

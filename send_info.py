@@ -6,7 +6,7 @@ import requests
 from config import DEBUG, APISERVER
 
 APIURL = APISERVER + "sendpic"
-HTTP_TIMEOUT=10
+HTTP_TIMEOUT=25
 
 #print (APIURL)
 
@@ -78,7 +78,7 @@ def SendMemFiles (files, file_name="file", file_type="jpg", info=None, params=No
         for f in files:
             f.seek(0)
             filename = file_name + str(i) + '.' + file_type
-            print(filename)
+            #print(filename)
             files_spec.append(('Picture', (filename, f)))
             i = i+1
     else:
