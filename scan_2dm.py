@@ -7,6 +7,7 @@ from datetime import datetime
 from config import DEBUG, WINDOWS, config
 from send_info import SendFiles, SendMemFiles
 from scan_set import ScanFileSet, ScanMemSet, ScanContMemSet
+from light_func import flash_light
 
 SCAN_PICTURE='scan_picture'
 NUMBER_PIC='number_pic'
@@ -25,8 +26,8 @@ if DEBUG: print ("Starting 2D Scan", start_time.time(), " Antal:", no_picture)
 # 	camera = PiCamera()
 # 	camera.capture('mypic.jpg')
 
-#files = ScanMemSet(no_picture)
-files = ScanContMemSet(no_picture)
+files = ScanMemSet(no_picture)
+#files = ScanContMemSet(no_picture)
 capture_time = datetime.now()
 captime = (capture_time - start_time).total_seconds()
 

@@ -1,20 +1,13 @@
 #!/usr/bin/python3 
 #
-# scan a picture serie for stitching
+# scan a set of pictures to files and send to server
 #
 
-#import os
-#import time
+import os
 from datetime import datetime
-#import configparser	
-#import requests
-#import signal
-
-#import config
 from config import DEBUG, WINDOWS, config
 from send_info import SendFiles
 from scan_set import ScanFileSet
-#from io import BytesIO
 
 SCAN_PICTURE='scan_picture'
 NUMBER_PIC='number_pic'
@@ -26,31 +19,20 @@ if DEBUG: print ("Starting 2D Scan", datetime.now().time())
 scanpicture = config[SCAN_PICTURE]
 no_picture = scanpicture.getint(NUMBER_PIC, NO_PICTURE)
 
-# init camera
-
-# if not WINDOWS:
-# 	print(" take pic")
-# 	camera = PiCamera()
-# 	camera.capture('mypic.jpg')
-
-# 	f1 = BytesIO()
-# 	camera.capture(f1,format='jpeg')
-# 	camera.capture('test.jpg')
-
-# filearr=[]
-# filearr.append('file1.jpg')
-# filearr.append('file2.jpg')
-#print ("arr",filearr)
-
+# scan
+start_time = datetime.now()
 files = ScanFileSet(no_picture)
-print ("Files:", files)
+cap_time = datetime.now()
+
+# send 
 data={'scannerid':'654321',"cmd":"stitch"}
 info={'billedinfo': str(no_picture) + " filer"}
 result =SendFiles(files, params=data, info=None)
+send_time = datetime.now()
+captime = (cap_time - start_time).total_seconds()
+print ("capture time: ", captime, "pic/sec:", no_picture/captime)
 print('Result:', result)
 if DEBUG: print ("Ending 2D Scan", datetime.now().time())
-
-#lib.send_pic.SendFiles(filearr)
-
-
-
+print ("Removing Files in /tmp")
+for f in files:
+    os.remove(f)
