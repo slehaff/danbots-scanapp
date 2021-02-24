@@ -18,6 +18,10 @@ scanpicture = config[SCAN_PICTURE]
 camera_init_time = scanpicture.getfloat('camera_init_time', 12)
 picture_interval_time = scanpicture.getfloat('picture_interval_time', 5)
 
+scansettings = config['scan']
+picturewidth = scansettings.getint('width',720)
+pictureheight = scansettings.getint("height", 480)
+
 FOLDER = "/tmp/"
 FILENAME = "file"
 FILETYPE = ".jpg"
@@ -25,6 +29,7 @@ FILETYPE = ".jpg"
 if not WINDOWS:
     from picamera import PiCamera  # pylint: disable=unresolved-import
     camera = PiCamera()
+    camera.resolution = (picturewidth, pictureheight)
 else:
     FOLDER = 'data/'
 
@@ -40,10 +45,10 @@ def take_fd(format='jpeg'):
         camera.capture(fd, format=format)
     return fd
 
-def speed_fd():
+def speed_fd(format='jpeg'):
     if not WINDOWS:
         fd = BytesIO()
-        camera.capture(fd, format='jpeg', use_video_port=True)
+        camera.capture(fd, format=format, use_video_port=True)
     return fd
 
 def ScanFileSet(antal=1):
@@ -76,10 +81,10 @@ def ScanContMemSet(antal=10, format='jpeg', flash=None):
     j = 1
     filelist = []
     stream = BytesIO()
-    #if flash : flash(j)
-    for i in enumerate(camera.capture_continuous(stream, format='jpeg', use_video_port=True)):
+    if flash : flash(j)
+    for i in enumerate(camera.capture_continuous(stream, format=format, use_video_port=True)):
         j = j+1    
-        #if flash : flash(j)    
+        if flash : flash(j)    
         stream.truncate()
         stream.seek(0)
         fd = BytesIO()
@@ -89,6 +94,6 @@ def ScanContMemSet(antal=10, format='jpeg', flash=None):
         stream.truncate(0)
 
         if j>antal:
-            #if flash : flash(0)
+            if flash : flash(0)
             break;
     return filelist

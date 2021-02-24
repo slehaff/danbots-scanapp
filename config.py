@@ -26,6 +26,8 @@ config = configparser.ConfigParser()
 config.read_file(open(CONFIGFILE,'r'))
 DEBUG=config.getboolean('debug','debug',fallback=False)
 
+DEVICEID = config.get('device','deviceid',fallback='11223344')
+
 # if 'debug' in config:
 #     DEBUG=config['debug'].get('debug', DEBUG) 
 #print ('Sections: ', config.sections())

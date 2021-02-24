@@ -26,15 +26,15 @@ if DEBUG: print ("Starting 2D Scan", start_time.time(), " Antal:", no_picture)
 # 	camera = PiCamera()
 # 	camera.capture('mypic.jpg')
 
-files = ScanMemSet(no_picture)
-#files = ScanContMemSet(no_picture)
+#files = ScanMemSet(no_picture)
+files = ScanContMemSet(no_picture, format='png', flash=flash_light)
 capture_time = datetime.now()
 captime = (capture_time - start_time).total_seconds()
 
 data={'scannerid':'654321',"cmd":"stitch"}
 info={'billedinfo': str(no_picture) + " filer"}
 
-result =SendMemFiles(files, params=data, info=None)
+result =SendMemFiles(files, file_type='png', params=data, info=None)
 end_time = datetime.now()
 time = (end_time - start_time).total_seconds()
 if DEBUG: 
