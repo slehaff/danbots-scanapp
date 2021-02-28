@@ -52,7 +52,7 @@ def speed_fd(format='jpeg'):
     return fd
 
 def ScanFileSet(antal=1):
-    time.sleep(camera_init_time)
+    #time.sleep(camera_init_time)
     i = 1
     filelist =[]
     while i<=antal:
@@ -64,7 +64,7 @@ def ScanFileSet(antal=1):
     return filelist
 
 def ScanMemSet(antal=1, format='jpeg'):
-    time.sleep(camera_init_time)
+    #time.sleep(camera_init_time)
     i = 1
     filelist =[]
     while i<=antal:
@@ -77,7 +77,7 @@ def ScanMemSet(antal=1, format='jpeg'):
     return filelist
 
 def ScanContMemSet(antal=10, format='jpeg', flash=None):
-    time.sleep(camera_init_time)
+    #time.sleep(camera_init_time)
     j = 1
     filelist = []
     stream = BytesIO()
