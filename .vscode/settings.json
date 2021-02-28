@@ -1,3 +1,14 @@
 {
-    "python.pythonPath": "e:\\Arbejde\\DanBots\\DanWand\\danbots-scanapp\\.env\\Scripts\\python.exe"
+    "python.pythonPath": "e:\\Arbejde\\DanBots\\DanWand\\danbots-scanapp\\.env\\Scripts\\python.exe",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintUseMinimalCheckers": false,
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint_django",
+        "--django-settings-module=live.settings",
+        "--disable=all",
+        "--enable=F,E,W,unreachable,duplicate-key,unnecessary-semicolon,global-variable-not-assigned,unused-variable,binary-op-exception,bad-format-string,anomalous-backslash-in-string,bad-open-mode",
+        "--disable=no-absolute-import"
+    ],
 }

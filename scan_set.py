@@ -76,13 +76,12 @@ def ScanMemSet(antal=1, format='jpeg'):
         i += 1
     return filelist
 
-def ScanContMemSet(antal=10, format='jpeg', flash=None):
-    #time.sleep(camera_init_time)
+def ScanContMemSet(antal, format='jpeg', flash=None):
     j = 1
     filelist = []
     stream = BytesIO()
     if flash : flash(j)
-    for i in enumerate(camera.capture_continuous(stream, format=format, use_video_port=True)):
+    for i in camera.capture_continuous(stream, format=format, use_video_port=True):
         j = j+1    
         if flash : flash(j)    
         stream.truncate()
@@ -91,9 +90,10 @@ def ScanContMemSet(antal=10, format='jpeg', flash=None):
         copyfileobj(stream, fd)
         filelist.append(fd)
         stream.seek(0)
-        stream.truncate(0)
+        #stream.truncate(0)
 
         if j>antal:
             if flash : flash(0)
             break;
+        time.sleep(picture_interval_time)
     return filelist
