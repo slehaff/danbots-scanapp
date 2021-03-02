@@ -93,8 +93,8 @@ def ScanContMemSet(antal, format='jpeg', flash=None):
             break;
     return filelist
 
-antal = 500
-print("starting")
+antal = 50
+print("starting - antal:", antal)
 camera=PiCamera()
 time.sleep(1)
 print("ISO:", camera.iso)
@@ -114,5 +114,5 @@ result = ScanContMemSet(antal, flash=dummy_flash)
 end_time= datetime.now()
 timelap = (end_time-start_time).total_seconds()
 print ("end", end_time, "length:", timelap,  "Billeder/sek:", antal/timelap)
-
-time.sleep(30)
+#print("sleep 15")
+#time.sleep(15)

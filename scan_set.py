@@ -92,7 +92,7 @@ def ScanContMemSet(antal, format='jpeg', flash=None):
         stream.seek(0)
         #stream.truncate(0)
 
-        if j>antal:
+        if j>=antal:
             if flash : flash(0)
             break;
         time.sleep(picture_interval_time)
