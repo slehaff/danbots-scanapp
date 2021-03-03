@@ -32,10 +32,35 @@ def ledLon(led):
 
 def ledoff(led):
     if led ==0:
+        led.value = 0.99
+    else
+        led.value = 0.0
         return
-    led.value = 0
-    # turn led off
+    
     return
+
+
+
+def flash_led(val):
+    FLASH_IO=13
+    led = PWMLED(FLASH_IO)
+    if val:
+        led.value = 0.99
+    else
+        led.value = 0.0
+    return
+
+def dias_led(val):
+    FLASH_IO=12
+    led = PWMLED(FLASH_IO)
+    if val:
+        led.value = 0.99
+    else
+        led.value = 0.0
+    return
+
+#tryk knap gpio 4
+
 
 def take(led,color, file):
     if led ==led1:
