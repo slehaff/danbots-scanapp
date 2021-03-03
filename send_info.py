@@ -109,3 +109,4 @@ def SendMemFiles (files, file_name="file", file_type="jpg", info=None, params=No
         print('Noget gik galt: ', r.status_code)
         print(r.text)
     return False
+
