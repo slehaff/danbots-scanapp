@@ -1,5 +1,5 @@
 # Old diascan file
-
+#..
 import io
 import socket
 import struct
